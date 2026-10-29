@@ -1,0 +1,13 @@
+GERADOR DE EXPORTAÇÃO EBO
+
+Publicar na Vercel:
+1. Extraia este ZIP em uma pasta.
+2. Abra um terminal nessa pasta.
+3. Execute: npx vercel
+4. Entre na sua conta e siga as perguntas para criar o projeto.
+5. Para publicar em produção, execute: npx vercel --prod
+
+Alternativa: envie index.html e vercel.json a um repositório GitHub e importe esse repositório na Vercel. Selecione Framework Preset: Other. Não é necessário comando de build.
+
+O processamento da planilha e a criação do XML ocorrem no navegador. O index.html também pode ser aberto diretamente para uso offline.
+EBO 6 e EBO 7: importação confirmada pelo usuário.
