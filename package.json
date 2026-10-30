@@ -1,0 +1,7 @@
+{
+  "name": "gerador-ebo",
+  "version": "1.9.0",
+  "private": true,
+  "engines": { "node": "22.x" },
+  "scripts": { "test": "node --test tests/*.test.js" }
+}
