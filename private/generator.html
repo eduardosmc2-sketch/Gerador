@@ -55,8 +55,15 @@ td,th{border-bottom-color:#365265}
       <table><thead><tr><th>Medidor</th><th>Tipo</th><th>Alimentador</th><th>Caminho no EBO</th><th>Composição</th></tr></thead>
       <tbody id="energy-rows"></tbody></table>
     </div>
-    <p class="muted">Export Sankey do HFA para EBO 7.0.3.142. Use caminhos absolutos ou iniciados por ~/ e terminados em /Value. Cada geral recebe seu próprio dashboard.</p>
-    <button id="energy-generate" type="button" disabled>Gerar e baixar XML de energia</button>
+    <label for="energy-version"><b>Versão do EBO de destino</b></label>
+    <select id="energy-version">
+      <option value="">Selecione a versão</option>
+      <option value="6">EBO 6</option>
+      <option value="7">EBO 7</option>
+    </select>
+    <p id="energy-version-note" class="muted" role="status" hidden>Export de energia para EBO 6 pendente de validação.</p>
+    <div class="toolbar" style="margin-top:14px">
+    <button id="energy-generate" type="button" disabled>Gerar e baixar XML de energia</button></div>
   </section>
 </section>
 </main></div>
@@ -165,7 +172,16 @@ function buildEnergyExport(meters) {
   return '<?xml version="1.0" encoding="utf-8"?>\n' + new XMLSerializer().serializeToString(doc);
 }
 
+function updateEnergyVersion() {
+  const version = $('energy-version').value;
+  $('energy-version-note').hidden = version !== '6';
+  $('energy-generate').disabled = version !== '7' || !energyMeters.length;
+}
+$('energy-version').onchange = updateEnergyVersion;
+updateEnergyVersion();
+
 $('energy-generate').onclick = () => {
+  if ($('energy-version').value !== '7' || !energyMeters.length) return;
   try {
     download(buildEnergyExport(energyMeters), 'Dashboard_Energia_EBO7.xml', 'application/xml');
     $('energy-status').textContent = 'XML de energia gerado para EBO 7.0.3.142.';
@@ -219,7 +235,7 @@ $('energy-file').onchange = async event => {
       }
     }
     energyMeters = meters;
-    $('energy-generate').disabled = false;
+    updateEnergyVersion();
     preview.hidden = false;
     status.textContent = meters.length + ' medidor(es) carregado(s). Confira os vínculos antes de usar no EBO.';
   } catch (error) {
