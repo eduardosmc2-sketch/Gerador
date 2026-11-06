@@ -5,17 +5,51 @@
 
 .login-page {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: #102438 url("/fundo-edw.webp") right center / cover no-repeat;
 }
 .login-page .login {
-  margin-left: clamp(16px, 10vw, 180px);
+  flex: 1;
+  display: grid;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-block: 24px;
+}
+.login-page .card {
+  margin: 0;
+  background: #102d3e;
+  color: #f3f8fb;
+  border-color: #375668;
+  box-shadow: 0 16px 44px #0006;
+}
+.login-page .muted {
+  color: #c5d6e0;
+}
+.login-page input {
+  background: #17394c;
+  border-color: #7897a9;
+  color: #fff;
+}
+.login-page input:autofill {
+  outline: 1px solid #7897a9;
+}
+.login-page .status {
+  color: #ffb8bf;
+}
+.login-page .status.ok {
+  color: #9ce7b9;
+}
+.login-page .status:empty {
+  display: none;
 }
 @media (max-width: 700px) {
   .login-page {
     background-size: auto 360px;
-    background-position: right top 70px;
+    background-position: right top 84px;
   }
   .login-page .login {
-    margin: 180px auto 0;
+    padding-top: 175px;
   }
 }
