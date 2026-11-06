@@ -2,3 +2,20 @@
 
 #loginform button[type=submit]{background:#00872b;font-weight:600}
 #loginform button[type=submit]:hover:not(:disabled){background:#006f23}
+
+.login-page {
+  min-height: 100vh;
+  background: #102438 url("/fundo-edw.webp") right center / cover no-repeat;
+}
+.login-page .login {
+  margin-left: clamp(16px, 10vw, 180px);
+}
+@media (max-width: 700px) {
+  .login-page {
+    background-size: auto 360px;
+    background-position: right top 70px;
+  }
+  .login-page .login {
+    margin: 180px auto 0;
+  }
+}
